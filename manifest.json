@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Private Equity Checker",
+  "version": "1.0",
+  "description": "Check if the current website's company is owned by private equity",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Check PE Ownership"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["pe_database.json"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
