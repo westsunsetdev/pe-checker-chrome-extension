@@ -9,7 +9,8 @@ chrome.runtime.onInstalled.addListener(loadPEDatabase);
 async function loadPEDatabase() {
   try {
     const response = await fetch(chrome.runtime.getURL('pe_database.json'));
-    peOwnedCompanies = await response.json();
+    const text = await response.text();
+    peOwnedCompanies = JSON.parse(text);
     console.log(`Loaded ${Object.keys(peOwnedCompanies).length} PE companies from database`);
   } catch (error) {
     console.error('Error loading PE database:', error);

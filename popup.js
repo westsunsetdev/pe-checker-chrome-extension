@@ -87,9 +87,7 @@ async function updateUI(domain, companyData, actualCompanyName) {
     peStatusEl.textContent = 'Private Equity Owned';
     peStatusEl.className = 'pe-status pe-owned';
     detailsEl.innerHTML = `
-      <strong>Owner:</strong> ${companyData.owner}<br>
-      <strong>Acquired:</strong> ${companyData.year}<br>
-      <em>This company is owned by private equity.</em>
+      <strong>Owner:</strong> ${companyData.owner}
     `;
   } else {
     peStatusEl.textContent = 'Not in PE Database';
@@ -109,7 +107,9 @@ async function checkCurrentSite() {
     
     if (!domain) {
       document.getElementById('loading').style.display = 'none';
-      document.getElementById('results').style.display = 'block';
+      const results = document.getElementById('results');
+      results.style.display = 'block';
+      setTimeout(() => results.classList.add('show'), 10);
       document.getElementById('details').textContent = 'Unable to analyze this page.';
       return;
     }
@@ -125,7 +125,9 @@ async function checkCurrentSite() {
     
     // Update UI with both PE data and extracted company name
     document.getElementById('loading').style.display = 'none';
-    document.getElementById('results').style.display = 'block';
+    const results = document.getElementById('results');
+    results.style.display = 'block';
+    setTimeout(() => results.classList.add('show'), 10);
     await updateUI(domain, companyData, companyName);
     
   } catch (error) {
